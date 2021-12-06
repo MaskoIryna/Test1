@@ -7,7 +7,7 @@ import pages.SearchPage;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-public class SearchResultsTests extends TestBase{
+public class SearchResultsTest extends TestBase{
     private final String SEARCH_TEXT = "Selenium WebDriver";
     private final String SEARCH_RESULT_TEXT = "WebDriver | Selenium";
     private final String SEARCH_URL = "https://www.selenium.dev/documentation/webdriver/";
