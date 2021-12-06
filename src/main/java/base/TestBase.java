@@ -1,7 +1,12 @@
 package base;
 
 import com.codeborne.selenide.Configuration;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Selenide.open;
@@ -27,8 +32,22 @@ public class TestBase {
         open("https://www.google.com/");
     }
 
-//    @AfterMethod
+    //    @AfterMethod
 //    public void teardown() {
 //        driver.close();
 //    }
+    @AfterTest
+    public void addEnvData() {
+        File file = new File("target/allure-results/environment.properties");
+        String envVars = "Browser=%s\nBrowser.Version=%s\nStand=%s";
+        envVars = String.format(envVars, Configuration.browser, Configuration.browserVersion, "Prod");
+
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(envVars);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

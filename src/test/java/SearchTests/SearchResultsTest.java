@@ -1,12 +1,15 @@
 package SearchTests;
 
+import base.ScreenshotListener;
 import base.TestBase;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SearchPage;
 
 import static org.testng.AssertJUnit.assertTrue;
 
+@Listeners(ScreenshotListener.class)
 public class SearchResultsTest extends TestBase{
     private final String SEARCH_TEXT = "Selenium WebDriver";
     private final String SEARCH_RESULT_TEXT = "WebDriver | Selenium";
@@ -17,5 +20,12 @@ public class SearchResultsTest extends TestBase{
         HomePage.search(SEARCH_TEXT);
         assertTrue("Не найдено ссылки с заданым текстом", SearchPage.checkLinkText(SEARCH_RESULT_TEXT));
         assertTrue("Link Url not found", SearchPage.checkLinkUrl(SEARCH_URL));
+    }
+
+    @Test
+    public void searchResultsLinksCheckFail() {
+        HomePage.search(SEARCH_TEXT);
+        assertTrue("Не найдено ссылки с заданым текстом", SearchPage.checkLinkText(SEARCH_RESULT_TEXT));
+        assertTrue("Link Url not found", SearchPage.checkLinkUrl("SEARCH_URL"));
     }
 }
