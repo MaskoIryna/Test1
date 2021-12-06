@@ -7,17 +7,15 @@ import pages.SearchPage;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-/**
- * Created by student on 9/8/2015.
- */
 public class SearchResultsTests extends TestBase{
     private final String SEARCH_TEXT = "Selenium WebDriver";
-    private final String SEARCH_URL = "http://docs.seleniumhq.org/projects/webdriver";
+    private final String SEARCH_RESULT_TEXT = "WebDriver | Selenium";
+    private final String SEARCH_URL = "https://www.selenium.dev/documentation/webdriver/";
 
     @Test
     public void searchResultsLinksCheck() {
-        HomePage.search(driver, SEARCH_TEXT);
-        assertTrue("Не найдено ссылки с заданым текстом", SearchPage.checkLinkText(driver, SEARCH_TEXT));
-        assertTrue("Link Url not found", SearchPage.checkLinkUrl(driver, SEARCH_URL));
+        HomePage.search(SEARCH_TEXT);
+        assertTrue("Не найдено ссылки с заданым текстом", SearchPage.checkLinkText(SEARCH_RESULT_TEXT));
+        assertTrue("Link Url not found", SearchPage.checkLinkUrl(SEARCH_URL));
     }
 }

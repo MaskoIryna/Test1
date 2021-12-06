@@ -1,24 +1,16 @@
 package base;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import com.codeborne.selenide.Configuration;
+import org.testng.annotations.BeforeMethod;
 
-import java.util.concurrent.TimeUnit;
+import static com.codeborne.selenide.Browsers.CHROME;
+import static com.codeborne.selenide.Selenide.open;
 
-/**
- * Created by student on 9/3/2015.
- */
 public class TestBase {
-    protected WebDriver driver;
 
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
-        String browser = System.getProperty("browser", "firefox");
+        String browser = System.getProperty("browser", CHROME);
 
         /*switch (browser) {
             case "chrome": driver = new ChromeDriver(); break;
@@ -27,17 +19,16 @@ public class TestBase {
             default: driver = new FirefoxDriver(); break;
         }*/
 
-        driver = new FirefoxDriver();
+        Configuration.browser = browser;
+        Configuration.startMaximized = true;
+        Configuration.timeout = 10000;
+        Configuration.pageLoadTimeout = 10000;
 
-
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        driver.get("http://www.tut.by");
+        open("https://www.google.com/");
     }
 
-    @AfterTest
-    public void teardown() {
-        driver.close();
-    }
+//    @AfterMethod
+//    public void teardown() {
+//        driver.close();
+//    }
 }
