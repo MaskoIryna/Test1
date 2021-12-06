@@ -28,4 +28,14 @@ public class SearchResultsTest extends TestBase{
         assertTrue("Не найдено ссылки с заданым текстом", SearchPage.checkLinkText(SEARCH_RESULT_TEXT));
         assertTrue("Link Url not found", SearchPage.checkLinkUrl("SEARCH_URL"));
     }
+
+    @Test
+    public void searchResultsPassingTest() {
+        HomePage.search(SEARCH_TEXT);
+    }
+
+    @Test
+    public void anotherPassingTest() {
+        HomePage.search(SEARCH_TEXT);
+    }
 }
