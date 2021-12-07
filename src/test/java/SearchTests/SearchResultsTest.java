@@ -43,4 +43,11 @@ public class SearchResultsTest extends TestBase{
     public void anotherMeaninglessTest() {
         HomePage.search(SEARCH_TEXT);
     }
+
+    @Test
+    public void failingTest() {
+        HomePage.search("something");
+        assertTrue("Не найдено ссылки с заданым текстом", SearchPage.checkLinkText(SEARCH_RESULT_TEXT));
+        assertTrue("Link Url not found", SearchPage.checkLinkUrl(SEARCH_URL));
+    }
 }
