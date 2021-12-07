@@ -38,4 +38,9 @@ public class SearchResultsTest extends TestBase{
     public void anotherPassingTest() {
         HomePage.search(SEARCH_TEXT);
     }
+
+    @Test
+    public void anotherMeaninglessTest() {
+        HomePage.search(SEARCH_TEXT);
+    }
 }
