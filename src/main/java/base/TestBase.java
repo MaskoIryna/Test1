@@ -1,6 +1,10 @@
 package base;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
+import com.microsoft.edge.seleniumtools.EdgeDriver;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 
@@ -9,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import static com.codeborne.selenide.Browsers.CHROME;
+import static com.codeborne.selenide.Browsers.EDGE;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestBase {
@@ -24,7 +29,14 @@ public class TestBase {
             default: driver = new FirefoxDriver(); break;
         }*/
 
-        Configuration.browser = browser;
+        if (browser == EDGE) {
+            WebDriver edge = new EdgeDriver();
+            edge.manage().window().maximize();
+            WebDriverRunner.setWebDriver(edge);
+        } else {
+            Configuration.browser = browser;
+        }
+
         Configuration.startMaximized = true;
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 10000;
@@ -32,10 +44,11 @@ public class TestBase {
         open("https://www.google.com/");
     }
 
-    //    @AfterMethod
-//    public void teardown() {
-//        driver.close();
-//    }
+    @AfterMethod
+    public void teardown() {
+        WebDriverRunner.closeWebDriver();
+    }
+
     @AfterTest
     public void addEnvData() {
         File file = new File("target/allure-results/environment.properties");
