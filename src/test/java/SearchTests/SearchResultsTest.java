@@ -48,4 +48,9 @@ public class SearchResultsTest extends TestBase{
     public void failingTest() {
         HomePage.search("something");
     }
+
+    @Test
+    public void passingTest() {
+        System.out.println("I've passed!");
+    }
 }
