@@ -28,6 +28,8 @@ public class SearchPage {
         return false;
     }
 
+
+    //Comment for git
     public static boolean checkLinkUrl(String linkUrl) {
         List<SelenideElement> linksList = $$(RESULT_LINK);
         //boolean linkExists = false;
